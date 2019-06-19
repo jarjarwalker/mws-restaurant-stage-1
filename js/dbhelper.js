@@ -1,6 +1,7 @@
 /**
  * Common database helper functions.
  */
+/*jshint esversion: 6 */
 class DBHelper {
 
   /**
