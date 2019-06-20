@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 console.log('Service Worker: Registered');
 
-const staticCacheName = 'restaurant-cache-1';
+const nameOfCache = 'restaurant-cache-1';
 
-//files that are going to be chached
+//files that are going to be cached
 const cacheFiles = [
     '/',
     '/index.html',
@@ -26,10 +26,10 @@ const cacheFiles = [
     '/img/10.jpg'
 ];
 
-//install service worker, add cache with cacheFiles
+//install service worker, add cacheFiles to cache
 self.addEventListener('install', function (e) {
     e.waitUntil(
-        caches.open(staticCacheName).then(function(cache){
+        caches.open(nameOfCache).then(function(cache){
             return cache.addAll(cacheFiles);
         }).catch(error => {
             console.log(error);
@@ -46,7 +46,7 @@ self.addEventListener('activate', function(event){
             return Promise.all(
                 cacheNames.filter(function (cacheName){
                     return cacheName.startsWith('restaurant-') &&
-                    cacheName != staticCacheName;
+                    cacheName != nameOfCache;
                 }).map(function(cacheName){
                     return caches.delete(cacheName);
                 })
